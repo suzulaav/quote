@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            background-color: darkslategrey;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+        }
+        .next {
+            background-color: burlywood;
+            border: none;
+            padding: 15px;
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .container {
+            background-color: rgb(8, 14, 43);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="container">
+       <h1>
+       <span class="quote" id="quote"></span>
+       <div class="buttons">
+       <button class="next" onclick="getNewQuote()">Next quote</button>
+       </div>
+   </div>
+    <script>
+    const text=document.getElementById("quote");
+    const getNewQuote = async () =>
+    {
+    var url="https://type.fit/api/quotes";    
+    const response=await fetch(url);
+    console.log(typeof response);
+    const allQuotes = await response.json();
+    const indx = Math.floor(Math.random()*allQuotes.length);
+    const quote=allQuotes[indx].text;
+    text.innerHTML=quote; 
+    }
+getNewQuote();
+    </script>
+</body>
+</html>
